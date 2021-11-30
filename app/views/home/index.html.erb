@@ -1,0 +1,97 @@
+<div class="container mt-5">
+  <h2>Database Connections</h2>
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add New Database</button>
+  <a class="btn btn-primary" href="/blazer">Dashboard</a>
+  <table class="table table-striped mt-2">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Database</th>
+        <th>Creds</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @databases['data_sources'].each_with_index do |db, index| %>
+        <% if db[0] != 'main' %>
+          <tr>
+            <td><%= db[0] %></td>
+            <td><%= db[1]['url']&.split('/')&.last %></td>
+            <td>
+              <a href="javascript:void(0)" data-toggle="modal" data-target="#modal<%= index %>">Edit Creds</a>
+              <a href="/delete_db/<%= db[0] %>" data-confirm="Are you sure?">Delete</a>
+            </td>
+            <div class="modal" id="modal<%= index %>">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Edit Database</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+                  <div class="modal-body">
+                    <h4>Sample URLs</h4>
+                    <ul>
+                      <li><pre>mongodb://user:password@hostname:27017/database</pre></li>
+                      <li><pre>mysql2://user:password@hostname:3306/database</pre></li>
+                      <li><pre>postgres://user:password@hostname:5432/database</pre></li>
+                      <li><pre>sqlserver://user:password@hostname:1433/database</pre></li>
+                    </ul>
+                    <%= form_tag("/save_db", method: "post") do %>
+                      <label>Database Name</label>
+                      <div class = "form-group">
+                        <input type="text" name="db_name" class = "form-control" id = "exampleFormControlInput1" placeholder = "Enter database name" value="<%= db[0] %>">
+                      </div>
+                      <label>Database URL</label>
+                      <div class = "form-group">
+                        <input type="text" name="db_url" class = "form-control" id = "exampleFormControlInput1" placeholder = "Enter database url" value="<%= db[1]['url'] %>">
+                      </div>
+                      <button class="btn btn-primary" type="submit">Save</button>
+                    <% end %>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </tr>
+        <% end %>
+      <% end %>  
+    </tbody>
+  </table>
+</div>
+
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Add Database</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <h4>Sample URLs</h4>
+        <ul>
+          <li><pre>mongodb://user:password@hostname:27017/database</pre></li>
+          <li><pre>mysql2://user:password@hostname:3306/database</pre></li>
+          <li><pre>postgres://user:password@hostname:5432/database</pre></li>
+          <li><pre>sqlserver://user:password@hostname:1433/database</pre></li>
+        </ul>
+        <%= form_tag("/save_db", method: "post") do %>
+          <label>Database Name</label>
+          <div class = "form-group">
+            <input type="text" name="db_name" class = "form-control" id = "exampleFormControlInput1" placeholder = "Enter database name">
+          </div>
+          <label>Database URL</label>
+          <div class = "form-group">
+            <input type="text" name="db_url" class = "form-control" id = "exampleFormControlInput1" placeholder = "Enter database url">
+          </div>
+          <button class="btn btn-primary" type="submit">Save</button>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>

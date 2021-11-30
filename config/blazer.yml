@@ -1,0 +1,12 @@
+---
+data_sources:
+  main:
+    url: <%= ENV["BLAZER_DATABASE_URL"] %>
+    smart_variables: 
+    linked_columns: 
+    smart_columns:
+audit: true
+check_schedules:
+- 1 day
+- 1 hour
+- 5 minutes
