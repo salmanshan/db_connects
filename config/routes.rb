@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   root 'home#index'
   # get '/restart', to: 'application#restart' 
   post '/save_db', to: 'home#save_db'
+  get '/delete_db/:name', to: 'home#delete_db'
 end
