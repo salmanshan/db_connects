@@ -7,7 +7,7 @@ ruby '2.6.6'
 gem 'rails', '~> 5.2.4', '>= 5.2.4.4'
 # Use mysql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
-gem 'blazer', path: "/Users/apple/Downloads/blazer"
+gem 'blazer', path: "lib/blazer"
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets

@@ -1,5 +1,5 @@
 PATH
-  remote: /Users/apple/Downloads/blazer
+  remote: lib/blazer
   specs:
     blazer (2.4.8)
       activerecord (>= 5)
