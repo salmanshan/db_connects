@@ -51,7 +51,7 @@ class DatabasesController < ApplicationController
   def destroy
     @database.destroy
     respond_to do |format|
-      format.html { redirect_to databases_url, notice: "Database was successfully destroyed." }
+      format.html { redirect_to "/", notice: "Database was successfully destroyed." }
       format.json { head :no_content }
     end
   end
